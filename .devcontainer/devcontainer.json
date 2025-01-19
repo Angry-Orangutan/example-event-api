@@ -10,7 +10,10 @@
 	},
 	"customizations": {
 		"vscode": {
-			"extensions": [],
+			"extensions": [
+				"charliermarsh.ruff",
+				"matangover.mypy"
+			],
 			"settings": {
 				"python.defaultInterpreterPath": "/usr/local/bin/python",
 				"python.linting.enabled": true,
