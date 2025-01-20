@@ -20,7 +20,7 @@ def test_alert_123_triggered():
     # First deposit
     response = client.post(
         "/event",
-        json={"type": EventType.DEPOSIT, "amount": "100.00", "user_id": 1, "t": 100},
+        json={"type": EventType.DEPOSIT, "amount": "100.00", "user_id": 1, "t": 10},
     )
     assert response.status_code == 200
     assert response.json()["alert_codes"] == []
@@ -28,7 +28,7 @@ def test_alert_123_triggered():
     # Second deposit within 30 seconds
     response = client.post(
         "/event",
-        json={"type": EventType.DEPOSIT, "amount": "150.00", "user_id": 1, "t": 120},
+        json={"type": EventType.DEPOSIT, "amount": "150.00", "user_id": 1, "t": 20},
     )
     assert response.status_code == 200
     assert AlertCode.ALERT_123.value in response.json()["alert_codes"]
@@ -39,7 +39,7 @@ def test_alert_123_not_triggered_under_200():
     # First deposit
     response = client.post(
         "/event",
-        json={"type": EventType.DEPOSIT, "amount": "50.00", "user_id": 1, "t": 100},
+        json={"type": EventType.DEPOSIT, "amount": "50.00", "user_id": 1, "t": 10},
     )
     assert response.status_code == 200
     assert response.json()["alert_codes"] == []
@@ -47,7 +47,7 @@ def test_alert_123_not_triggered_under_200():
     # Second deposit within 30 seconds
     response = client.post(
         "/event",
-        json={"type": EventType.DEPOSIT, "amount": "40.00", "user_id": 1, "t": 110},
+        json={"type": EventType.DEPOSIT, "amount": "40.00", "user_id": 1, "t": 20},
     )
     assert response.status_code == 200
     assert response.json()["alert_codes"] == []
@@ -58,7 +58,7 @@ def test_alert_123_not_triggered_outside_window():
     # First deposit
     response = client.post(
         "/event",
-        json={"type": EventType.DEPOSIT, "amount": "100.00", "user_id": 2, "t": 100},
+        json={"type": EventType.DEPOSIT, "amount": "100.00", "user_id": 2, "t": 10},
     )
     assert response.status_code == 200
     assert response.json()["alert_codes"] == []
@@ -66,7 +66,7 @@ def test_alert_123_not_triggered_outside_window():
     # Second deposit after 30 seconds
     response = client.post(
         "/event",
-        json={"type": EventType.DEPOSIT, "amount": "150.00", "user_id": 2, "t": 140},
+        json={"type": EventType.DEPOSIT, "amount": "150.00", "user_id": 2, "t": 50},
     )
     assert response.status_code == 200
     assert AlertCode.ALERT_123.value not in response.json()["alert_codes"]
@@ -77,7 +77,7 @@ def test_alert_123_triggered_by_single_deposit():
     # First deposit
     response = client.post(
         "/event",
-        json={"type": EventType.DEPOSIT, "amount": "200.01", "user_id": 1, "t": 100},
+        json={"type": EventType.DEPOSIT, "amount": "200.01", "user_id": 1, "t": 10},
     )
     assert response.status_code == 200
     assert AlertCode.ALERT_123.value in response.json()["alert_codes"]
@@ -88,7 +88,7 @@ def test_alert_123_not_triggered_by_200():
     # First deposit
     response = client.post(
         "/event",
-        json={"type": EventType.DEPOSIT, "amount": "200.00", "user_id": 1, "t": 100},
+        json={"type": EventType.DEPOSIT, "amount": "200.00", "user_id": 1, "t": 10},
     )
     assert response.status_code == 200
     assert AlertCode.ALERT_123.value not in response.json()["alert_codes"]
