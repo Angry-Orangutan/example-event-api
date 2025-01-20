@@ -135,6 +135,16 @@ Response:
 }
 ```
 
+#### POST /clear
+Reset all application state. This endpoint is primarily used for testing purposes to clear the state between test runs.
+
+Response:
+```json
+{
+  "status": "cleared"
+}
+```
+
 ### Rules
 
 The service implements the following rules:
