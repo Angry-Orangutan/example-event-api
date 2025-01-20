@@ -1,0 +1,13 @@
+{
+    "python.analysis.inlayHints.pytestParameters": true,
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "testing.showAllMessages": true,
+    "python.analysis.typeCheckingMode": "basic",
+    "mypy.targets": [
+        "app"
+    ]
+}
