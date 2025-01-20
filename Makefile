@@ -9,7 +9,7 @@ install-prod:
 	pip install -r ./requirements.txt
 
 run:
-	fastapi dev app/main.py --port 5000
+	fastapi dev app/main.py --host 0.0.0.0 --port 5000
 # python app/main.py 
 
 send-event:

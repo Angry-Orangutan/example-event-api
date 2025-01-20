@@ -38,10 +38,10 @@ make run  # Starts the service on port 5000
 ```
 
 The API will be available at:
-- API: http://localhost:5000
-- Documentation: http://localhost:5000/docs
-- Alternative docs: http://localhost:5000/redoc
-- Health check: http://localhost:5000/health
+- API: http://127.0.0.1:5000
+- Documentation: http://127.0.0.1:5000/docs
+- Alternative docs: http://127.0.0.1:5000/redoc
+- Health check: http://127.0.0.1:5000/health
 
 ## Development
 
@@ -140,9 +140,9 @@ Response:
 The service implements the following rules:
 
 1. **Rule 30**: Alert on three consecutive withdrawals
-2. **Rule 123**: Alert when total deposits exceed $200 in a 30-second window
+2. **Rule 123**: Alert when total deposits exceed £200 in a 30-second window
 3. **Rule 300**: Alert on pattern of increasing deposit amounts
-4. **Rule 1100**: Alert on withdrawals over $100
+4. **Rule 1100**: Alert on withdrawals over £100
 
 ## License
 
