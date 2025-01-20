@@ -3,18 +3,13 @@ from fastapi.testclient import TestClient
 
 from app.main import app
 from app.models.alert import AlertCode
-from app.services.state_manager import StateManager
+from tests.utils.fixtures import clear_state  # noqa: F401
 
 client = TestClient(app)
 
 
-@pytest.fixture(autouse=True)
-def clear_state() -> None:
-    """Clear state manager before each test"""
-    StateManager().clear()
-
-
-def test_three_consecutive_increasing_deposits_triggers_alert():
+@pytest.mark.usefixtures("clear_state")
+def test_three_consecutive_increasing_deposits_triggers_alert() -> None:
     """
     Test that three consecutive increasing deposits trigger Alert 300.
 
@@ -43,7 +38,8 @@ def test_three_consecutive_increasing_deposits_triggers_alert():
     assert AlertCode.ALERT_300.value in [code for code in response.json()["alert_codes"]]
 
 
-def test_withdrawals_between_deposits_dont_affect_alert():
+@pytest.mark.usefixtures("clear_state")
+def test_withdrawals_between_deposits_dont_affect_alert() -> None:
     """
     Test that withdrawals between deposits don't prevent Alert 300 from triggering.
 
@@ -80,7 +76,8 @@ def test_withdrawals_between_deposits_dont_affect_alert():
     assert AlertCode.ALERT_300.value in [code for code in response.json()["alert_codes"]]
 
 
-def test_non_increasing_deposits_no_alert():
+@pytest.mark.usefixtures("clear_state")
+def test_non_increasing_deposits_no_alert() -> None:
     """
     Test that non-increasing deposits don't trigger Alert 300.
 
@@ -107,7 +104,8 @@ def test_non_increasing_deposits_no_alert():
     assert AlertCode.ALERT_300.value not in [code for code in response.json()["alert_codes"]]
 
 
-def test_different_users_dont_interfere():
+@pytest.mark.usefixtures("clear_state")
+def test_different_users_dont_interfere() -> None:
     """
     Test that deposits from different users don't interfere with each other's alerts.
 

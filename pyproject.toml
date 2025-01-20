@@ -9,6 +9,8 @@ readme = "README.md"
 requires-python = ">=3.10"
 
 [tool.pytest.ini_options]
+asyncio_mode = "auto"
+
 addopts = [
     "--capture=no",
     "--showlocals"

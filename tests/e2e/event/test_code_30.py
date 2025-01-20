@@ -3,18 +3,13 @@ from fastapi.testclient import TestClient
 
 from app.main import app
 from app.models.alert import AlertCode
-from app.services.state_manager import StateManager
+from tests.utils.fixtures import clear_state  # noqa: F401
 
 client = TestClient(app)
 
 
-@pytest.fixture(autouse=True)
-def clear_state() -> None:
-    """Clear state manager before each test"""
-    StateManager().clear()
-
-
-def test_three_consecutive_withdrawals_triggers_alert():
+@pytest.mark.usefixtures("clear_state")
+def test_three_consecutive_withdrawals_triggers_alert() -> None:
     """
     Test that three consecutive withdrawals trigger Alert 30.
 
@@ -43,7 +38,8 @@ def test_three_consecutive_withdrawals_triggers_alert():
     assert AlertCode.ALERT_30.value in [code for code in response.json()["alert_codes"]]
 
 
-def test_deposit_breaks_consecutive_withdrawals():
+@pytest.mark.usefixtures("clear_state")
+def test_deposit_breaks_consecutive_withdrawals() -> None:
     """
     Test that a deposit between withdrawals prevents Alert 30 from triggering.
 
@@ -75,7 +71,8 @@ def test_deposit_breaks_consecutive_withdrawals():
     assert AlertCode.ALERT_30.value not in [code for code in response.json()["alert_codes"]]
 
 
-def test_less_than_three_withdrawals_no_alert():
+@pytest.mark.usefixtures("clear_state")
+def test_less_than_three_withdrawals_no_alert() -> None:
     """
     Test that less than three withdrawals do not trigger Alert 30.
 
@@ -97,7 +94,8 @@ def test_less_than_three_withdrawals_no_alert():
     assert not response.json()["alert"]
 
 
-def test_multiple_alerts_can_trigger():
+@pytest.mark.usefixtures("clear_state")
+def test_multiple_alerts_can_trigger() -> None:
     """
     Test that Alert 30 can trigger alongside other alerts.
 
@@ -126,7 +124,8 @@ def test_multiple_alerts_can_trigger():
     assert AlertCode.ALERT_1100.value in alert_codes
 
 
-def test_different_users_dont_interfere():
+@pytest.mark.usefixtures("clear_state")
+def test_different_users_dont_interfere() -> None:
     """
     Test that withdrawals from different users don't interfere with each other's alerts.
 

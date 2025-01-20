@@ -4,7 +4,7 @@ import pytest
 
 from app.models.event import EventRequest, EventType
 from app.services.state_manager import StateManager
-from tests.unit.services.state_manager.test_base import state_manager  # noqa: F401
+from tests.utils.fixtures import state_manager  # noqa: F401
 
 
 @pytest.mark.usefixtures("state_manager")
