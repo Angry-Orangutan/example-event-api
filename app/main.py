@@ -1,4 +1,4 @@
-"""Main application module for the Midnite API."""
+"""Main application module for the Example Event API."""
 
 from typing import Final
 
@@ -9,9 +9,9 @@ from app.routers import clear, event, health
 from app.services.state_manager import StateManager
 
 # API metadata constants
-API_TITLE: Final[str] = "Midnite API"
+API_TITLE: Final[str] = "Example Event API"
 API_DESCRIPTION: Final[str] = """
-Midnite API for processing financial transactions and detecting suspicious patterns.
+Example Event API for processing financial transactions and detecting suspicious patterns.
 """
 API_VERSION: Final[str] = "1.0.0"
 
@@ -28,7 +28,7 @@ app = FastAPI(
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all - incase Midnite test via browser
+    allow_origins=["*"],  # Allow all - incase company runs tests via browser
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

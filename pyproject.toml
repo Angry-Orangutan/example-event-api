@@ -1,10 +1,10 @@
 [project]
-name = "Midnite API"
+name = "Event API"
 version = "1.0.0"
 authors = [
     { name = "Gareth E" },
 ]
-description = "Midnite Take-Home"
+description = "Example Event API"
 readme = "README.md"
 requires-python = ">=3.10"
 

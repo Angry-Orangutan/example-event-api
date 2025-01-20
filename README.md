@@ -1,4 +1,4 @@
-# Midnite API
+# Example Event API
 
 A FastAPI-based service for processing transactions and detecting suspicious patterns.
 
@@ -18,8 +18,8 @@ A FastAPI-based service for processing transactions and detecting suspicious pat
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/Angry-Orangutan/midnite-api.git
-cd midnite-api
+git clone https://github.com/Angry-Orangutan/example-event-api.git
+cd example-event-api
 ```
 
 2. Install dependencies:
